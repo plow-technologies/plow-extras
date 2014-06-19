@@ -1,24 +1,28 @@
-plow-extras
-===========
+hi-hspec
+=================
 
-packages with mutli-purpose use
+A template for [hi](https://github.com/fujimura/hi).
 
+example:
 
+```
+$ hi -m Foo.Bar -p foo-bar  -r git@github.com:fujimura/hi-hspec.git
+$ tree
+.
+├── LICENSE
+├── README.md
+├── foo-bar.cabal
+├── src
+│   └── Foo
+│       ├── Bar
+│       │   └── Internal.hs
+│       └── Bar.hs
+└── test
+    ├── Foo
+    │   └── BarSpec.hs
+    └── Spec.hs
 
-Often, when writing libraries a few functions get written over and over.  I am tired of this happening ad-hoc, with no chance to improve them.
+5 directories, 7 files
+```
 
-So I am making this library, basically if you make a package here it should be really really re-usable.
-
-# No Typeclasses!
-# No Types!
-
-+ if it isn't a function it doesn't belong here. 
-
-+  base + 1 , maaaybe 2 packages.
-
-packages 
-------------------
-
-plow-extras-base ...
-only depends
-
+Copyright 2013-2014 Fujimura Daisuke, under the MIT license.
