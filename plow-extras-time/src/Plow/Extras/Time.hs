@@ -1,12 +1,18 @@
+
 {-# LANGUAGE OverloadedStrings #-}
+
 module Plow.Extras.Time where
 
-import Data.Time
+import Data.Time (UTCTime)
 import Data.Time.Clock.POSIX
+  ( utcTimeToPOSIXSeconds
+  , posixSecondsToUTCTime
+    )
 
+-- | 'UTCTime' to Epoch Time transformation.
 utcTimeToInt :: Integral c => UTCTime -> c
-utcTimeToInt t = round.toRational $ utcTimeToPOSIXSeconds t
+utcTimeToInt = round . toRational . utcTimeToPOSIXSeconds
 
-
+-- | Epoch Time to 'UTCTime' transformation.
 intToUTCTime :: Int -> UTCTime
-intToUTCTime n = posixSecondsToUTCTime $ fromIntegral n 
+intToUTCTime = posixSecondsToUTCTime . fromIntegral

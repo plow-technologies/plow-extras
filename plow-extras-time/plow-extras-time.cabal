@@ -14,23 +14,23 @@ Build-Type:             Simple
 Library
   Default-Language:     Haskell2010
   HS-Source-Dirs:       src
-  GHC-Options:          -Wall
+  GHC-Options:          -Wall -Werror
   Exposed-Modules:      Plow.Extras.Time
-  Other-Modules:        Plow.Extras.Time.Internal
   Build-Depends:        base >= 4 && < 5,
                         time
                         
 
-Test-Suite spec
+test-suite plow-extras-time-test
   Type:                 exitcode-stdio-1.0
   Default-Language:     Haskell2010
-  Hs-Source-Dirs:       src
-                      , test
+  Hs-Source-Dirs:       test
   Ghc-Options:          -Wall
-  Main-Is:              Spec.hs
-  Build-Depends:        base
-                      , hspec
-                      , time
+  Main-Is:              Main.hs
+  Build-Depends: base >= 4 && < 5
+               , plow-extras-time
+               , tasty
+               , tasty-quickcheck
+               , quickcheck-instances
 
 Source-Repository head
   Type:                 git
