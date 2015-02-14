@@ -9,7 +9,7 @@ import Test.QuickCheck.Instances ()
 main :: IO ()
 main = defaultMain $ testGroup "plow-extras-time"
   [ testProperty "intToUTCTime . utcTimeToInt ~= id" $
-      \t -> abs (diffUTCTime (intToUTCTime $ utcTimeToInt t) t) <= 1
+      \t -> round (diffUTCTime (intToUTCTime $ utcTimeToInt t) t) == (0 :: Int)
   , testProperty "utcTimeToInt . intToUTCTime = id" $
       \t -> (utcTimeToInt . intToUTCTime) t == t
     ]
