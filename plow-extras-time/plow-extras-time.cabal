@@ -1,5 +1,5 @@
 Name:                   plow-extras-time
-Version:                0.2.0
+Version:                0.2.1
 Author:                 Lingpo Huang <lingpo.huang@plowtech.net>
 Maintainer:             Lingpo Huang <lingpo.huang@plowtech.net>
 License:                BSD3
@@ -8,6 +8,9 @@ Synopsis:               An extras library for time functions
 Description:            Curently Plow.Extras.Time contains:
                         utcTimeToInt -- a function to convert utcTime to Int
                         intToUTCTime -- a function to convert int to UTCTime
+                        diffTimeToInt -- a function to convert DiffTime to Int
+                        intToDiffTime -- a function to convert Int to DiffTime
+
 Cabal-Version:          >= 1.10
 Build-Type:             Simple
 
