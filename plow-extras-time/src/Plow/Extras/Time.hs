@@ -17,11 +17,9 @@ Portability :  portable
 
 module Plow.Extras.Time where
 
-import Data.Time (UTCTime,DiffTime,secondsToDiffTime)
-import Data.Time.Clock.POSIX
-  ( utcTimeToPOSIXSeconds
-  , posixSecondsToUTCTime
-    )
+import           Data.Time             (DiffTime, UTCTime, secondsToDiffTime)
+import           Data.Time.Clock.POSIX (posixSecondsToUTCTime,
+                                        utcTimeToPOSIXSeconds)
 
 -- | 'UTCTime' to Epoch Time transformation.
 utcTimeToInt :: Integral c => UTCTime -> c
@@ -38,4 +36,3 @@ diffTimeToInt = round . toRational
 -- | Int (seconds) to DiffTIme transformation.
 intToDiffTime :: Int -> DiffTime
 intToDiffTime = secondsToDiffTime . fromIntegral
-

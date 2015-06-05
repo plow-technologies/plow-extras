@@ -19,6 +19,7 @@ Library
   HS-Source-Dirs:       src
   GHC-Options:          -Wall
   Exposed-Modules:      Plow.Extras.Time
+                      , Plow.Extras.Crontab
   Build-Depends:        base >= 4 && < 5,
                         time
                         

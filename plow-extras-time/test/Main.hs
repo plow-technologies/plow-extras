@@ -1,10 +1,9 @@
+import           Plow.Extras.Time
 
-import Plow.Extras.Time
-
-import Data.Time.Clock (diffUTCTime)
-import Test.Tasty (defaultMain, testGroup)
-import Test.Tasty.QuickCheck (testProperty)
-import Test.QuickCheck.Instances ()
+import           Data.Time.Clock           (diffUTCTime)
+import           Test.QuickCheck.Instances ()
+import           Test.Tasty                (defaultMain, testGroup)
+import           Test.Tasty.QuickCheck     (testProperty)
 
 main :: IO ()
 main = defaultMain $ testGroup "plow-extras-time"
@@ -13,3 +12,5 @@ main = defaultMain $ testGroup "plow-extras-time"
   , testProperty "utcTimeToInt . intToUTCTime = id" $
       \t -> (utcTimeToInt . intToUTCTime) t == t
     ]
+
+
