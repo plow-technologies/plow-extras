@@ -1,10 +1,12 @@
-{-# LANGUAGE NoImplicitPrelude, NoMonomorphismRestriction, FlexibleContexts #-}
+{-# LANGUAGE CPP,NoImplicitPrelude, NoMonomorphismRestriction, FlexibleContexts, TemplateHaskell #-}
 
 module Plow.Extras.Lens where
 
-
+import Prelude (($))
+import Data.Char (toLower)
 import Control.Category
 import Data.Monoid
+import Language.Haskell.TH
 -- import Plow.Extras.Lens.Internal
 import Data.Functor
 import Control.Monad.Reader
@@ -39,3 +41,22 @@ icatPrisms l f = iviews (ifolded . l )  f ?? mempty
 
 
 
+
+-- | Make lenses with underscore trailing for non-underscored records
+-- non-classy variety without simple restrictions
+#if !MIN_VERSION_lens (4,5,4)
+makeLenses_ :: Name -> DecsQ
+makeLenses_ t = makeLensesWith ?? t $ lensRules & lensField .~ lFcn
+ where 
+   lFcn _fieldNames n = case nameBase n of
+                          x:xs -> [TopName (mkName ((toLower x:xs)  <> "_"))]
+                          [] -> []
+
+#else
+makeLenses_ :: Name -> DecsQ
+makeLenses_ t = makeLensesWith ?? t $ lensRules & lensField .~ lFcn
+ where 
+   lFcn _typeName _fieldNames n = case nameBase n of
+                                    x:xs -> [TopName (mkName ((toLower x:xs)  <> "_"))]
+                                    [] -> []
+#endif

@@ -1,5 +1,5 @@
 Name:                   plow-extras-lens
-Version:                0.1.0
+Version:                0.1.2
 Author:                 Scott Murphy <scottmurphy09@gmail.com>
 Maintainer:             Scott Murphy <scottmurphy09@gmail.com>
 License:                BSD3
@@ -13,11 +13,12 @@ Build-Type:             Simple
 Library
   Default-Language:     Haskell2010
   HS-Source-Dirs:       src
-  GHC-Options:          -Wall -Werror
+  GHC-Options:          -Wall 
   Exposed-Modules:      Plow.Extras.Lens
   Other-Modules:        Plow.Extras.Lens.Internal
   Build-Depends:        base >= 4 && < 5
-                      , lens
+                      , template-haskell
+                      , lens >= 4.3.3 && < 4.12
                       , mtl
 
 Test-Suite spec
