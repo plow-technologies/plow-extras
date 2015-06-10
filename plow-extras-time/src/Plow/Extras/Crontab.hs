@@ -80,7 +80,7 @@ parseHour :: ReadP Hour
 parseHour = parseBoundedInt 0 23
 
 parseDOM :: ReadP DOM
-parseDOM = parseBoundedInt 0 31
+parseDOM = parseBoundedInt 1 31
 
 parseBoundedInt :: Int -> Int -> ReadP Int
 parseBoundedInt i f = parseInt >>= checkInt
