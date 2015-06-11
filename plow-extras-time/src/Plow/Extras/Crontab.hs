@@ -34,8 +34,8 @@ data CronTab = CronTab {minute     :: Minute
 runReadP :: ReadP b -> String -> [b]
 runReadP incomingReadP  = fmap fst . readP_to_S incomingReadP
 
-testParser :: CronTab -> ReadS Bool
-testParser a = readP_to_S $ compareToParsedCron a
+--testParser :: CronTab -> ReadS Bool
+--testParser a = readP_to_S $ compareToParsedCron a
 
 --converts UTCTime to a Crontab to be compared to parsed CronTab
 utcToCronTab :: UTCTime -> CronTab
