@@ -5,7 +5,7 @@ Maintainer:             Lingpo Huang <lingpo.huang@plowtech.net>, Darren Midkiff
 License:                BSD3
 License-File:           LICENSE
 Synopsis:               An extras library for time functions
-Description:            Curently Plow.Extras.Time contains:
+Description:            Currently Plow.Extras.Time contains:
                         utcTimeToInt -- a function to convert utcTime to Int
                         intToUTCTime -- a function to convert int to UTCTime
                         diffTimeToInt -- a function to convert DiffTime to Int

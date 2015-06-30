@@ -6,9 +6,6 @@ import           Data.Time.Calendar.WeekDate
 import           Data.Time.LocalTime
 import           Text.ParserCombinators.ReadP
 
-shouldSend :: UTCTime -> ReadP Bool
-shouldSend time = compareToParsedCron $ utcToCronTab time
-
 data DOW = Sunday | Monday | Tuesday | Wednesday | Thursday | Friday | Saturday deriving (Ord, Eq, Show, Bounded, Enum)
 
 data Month = January | February | March | April | May | June | July | August | September | October | November | December deriving (Ord, Eq, Show, Bounded, Enum)
@@ -21,21 +18,18 @@ type Minute = Int
 
 data CronTabType = CTMinute Minute | CTHour Hour | CTDate DOM | CTMonth Month | CTDay DOW
 
-data CronTab = CronTab {minute     :: Minute
-                      , hour       :: Hour
-                      , dayOfMonth :: DOM
-                      , month      :: Month
-                      , dayOfWeek  :: DOW} deriving (Eq, Ord, Show)
+data CronTab = CronTab { minute     :: Minute
+                       , hour       :: Hour
+                       , dayOfMonth :: DOM
+                       , month      :: Month
+                       , dayOfWeek  :: DOW} deriving (Eq, Ord, Show)
 
 
--------------------------------------------------PARSING----------------------------------------------
+------------------------------------------------PARSING----------------------------------------------
 
 
 runReadP :: ReadP b -> String -> [b]
 runReadP incomingReadP  = fmap fst . readP_to_S incomingReadP
-
---testParser :: CronTab -> ReadS Bool
---testParser a = readP_to_S $ compareToParsedCron a
 
 --converts UTCTime to a Crontab to be compared to parsed CronTab
 utcToCronTab :: UTCTime -> CronTab
