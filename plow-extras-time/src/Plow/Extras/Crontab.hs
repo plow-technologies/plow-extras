@@ -1,9 +1,7 @@
 module Plow.Extras.Crontab where
 
-import           Control.Applicative
 import           Data.Time
 import           Data.Time.Calendar.WeekDate
-import           Data.Time.LocalTime
 import           Text.ParserCombinators.ReadP
 
 data DOW = Sunday | Monday | Tuesday | Wednesday | Thursday | Friday | Saturday deriving (Ord, Eq, Show, Bounded, Enum)
@@ -52,11 +50,14 @@ compareToParsedCron cron = do
   return $ min (minute cron) && hr (hour cron) && dom (dayOfMonth cron) && mon (month cron) && dow (dayOfWeek cron)
 
 parseRange :: (Enum a, Ord a) => ReadP a -> ReadP (a -> Bool)
-parseRange p = parseAsterik <++ parseRange <++ parseSingleton
+parseRange p = parseAsterik <++ parseRange <++ parseList <++ parseSingleton
   where
     parseSingleton = do
       val <- p
       return $ (==) val
+    parseList = do
+      vals <- sepBy p (char ',')
+      return $ flip elem vals
     parseRange = do
       first <- p
       _ <- char '-'
@@ -66,6 +67,11 @@ parseRange p = parseAsterik <++ parseRange <++ parseSingleton
       skipSpaces
       _ <- char '*'
       return $ const True
+    sort [] = []
+    sort (x:xs) =
+        let smallerSorted = sort (filter (<=x) xs)
+            biggerSorted = sort (filter (>x) xs)
+        in  smallerSorted ++ [x] ++ biggerSorted
 
 parseMinute :: ReadP Minute
 parseMinute = parseBoundedInt 0 59
