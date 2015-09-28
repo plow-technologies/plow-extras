@@ -18,6 +18,7 @@ Portability :  portable
 module Plow.Extras.Time where
 
 import           Data.Time             (DiffTime, UTCTime, secondsToDiffTime)
+import           Data.Time.Clock       (getCurrentTime)
 import           Data.Time.Clock.POSIX (posixSecondsToUTCTime,
                                         utcTimeToPOSIXSeconds)
 
@@ -36,3 +37,7 @@ diffTimeToInt = round . toRational
 -- | Int (seconds) to DiffTIme transformation.
 intToDiffTime :: Int -> DiffTime
 intToDiffTime = secondsToDiffTime . fromIntegral
+
+-- | Get the current epoch time in seconds.
+getCurrentEpochTime :: IO Int
+getCurrentEpochTime = utcTimeToInt <$> getCurrentTime
