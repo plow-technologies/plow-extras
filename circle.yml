@@ -24,4 +24,4 @@ deployment:
   staging:
     branch: master
     commands:
-      - cd plow-extras-time && sh plow-scripts/hackage.sh
+      - cd plow-extras-time && sh ../plow-scripts/hackage.sh
