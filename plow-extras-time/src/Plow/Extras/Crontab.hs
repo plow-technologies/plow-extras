@@ -31,26 +31,26 @@ runReadP incomingReadP  = fmap fst . readP_to_S incomingReadP
 
 --converts UTCTime to a Crontab to be compared to parsed CronTab
 utcToCronTab :: UTCTime -> CronTab
-utcToCronTab time = CronTab min hr dom (toMonth mnth) (toDOW dow)
+utcToCronTab time = CronTab m hr dom (toMonth mnth) (toDOW dow)
   where
     timeHMS = localTimeOfDay $ utcToLocalTime utc time
     (_, mnth, dom) = toGregorian $ utctDay time
-    min = todMin timeHMS
+    m = todMin timeHMS
     hr = todHour timeHMS
     (_, _, dow) = toWeekDate $ utctDay time
 
 --checks equality of CronTab input and parsed CronTab
 compareToParsedCron :: CronTab -> ReadP Bool
 compareToParsedCron cron = do
-  min <- parseRange parseMinute
+  m <- parseRange parseMinute
   hr <- parseRange parseHour
   dom <- parseRange parseDOM
   mon <- parseRange parseMonth
   dow <- parseRange parseDOW
-  return $ min (minute cron) && hr (hour cron) && dom (dayOfMonth cron) && mon (month cron) && dow (dayOfWeek cron)
+  return $ m (minute cron) && hr (hour cron) && dom (dayOfMonth cron) && mon (month cron) && dow (dayOfWeek cron)
 
 parseRange :: (Enum a, Ord a) => ReadP a -> ReadP (a -> Bool)
-parseRange p = parseAsterik <++ parseRange <++ parseList <++ parseSingleton
+parseRange p = parseAsterik <++ parseRng <++ parseList <++ parseSingleton
   where
     parseSingleton = do
       val <- p
@@ -58,20 +58,22 @@ parseRange p = parseAsterik <++ parseRange <++ parseList <++ parseSingleton
     parseList = do
       vals <- sepBy p (char ',')
       return $ flip elem vals
-    parseRange = do
+    parseRng = do
       first <- p
       _ <- char '-'
-      last <- p
-      return $ flip elem [first .. last]
+      lst <- p
+      return $ flip elem [first .. lst]
     parseAsterik = do
       skipSpaces
       _ <- char '*'
       return $ const True
-    sort [] = []
-    sort (x:xs) =
-        let smallerSorted = sort (filter (<=x) xs)
-            biggerSorted = sort (filter (>x) xs)
-        in  smallerSorted ++ [x] ++ biggerSorted
+    -- Daniel: Unused code?
+    --
+    -- sort [] = []
+    -- sort (x:xs) =
+    --     let smallerSorted = sort (filter (<=x) xs)
+    --         biggerSorted = sort (filter (>x) xs)
+    --     in  smallerSorted ++ [x] ++ biggerSorted
 
 parseMinute :: ReadP Minute
 parseMinute = parseBoundedInt 0 59
@@ -91,9 +93,7 @@ parseBoundedInt i f = parseInt >>= checkInt
     parseInt =  readS_to_P reads :: ReadP Int
 
 parseMonth :: ReadP Month
-parseMonth = do
-  month <- readS_to_P reads :: ReadP Int
-  return $ toMonth month
+parseMonth = toMonth <$> readS_to_P reads
 
 parseDOW :: ReadP DOW
 parseDOW = do
