@@ -115,6 +115,7 @@ toMonth monthInt =
       10 -> October
       11 -> November
       12 -> December
+      _ -> error $ "Invalid month: " ++ show monthInt
 
 toDOW :: Int -> DOW
 toDOW dayInt =
@@ -126,3 +127,4 @@ toDOW dayInt =
     4 -> Thursday
     5 -> Friday
     6 -> Saturday
+    _ -> error $ "Invalid Day of Week: " ++ show dayInt
