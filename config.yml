@@ -1,0 +1,26 @@
+machine:
+  ghc:
+    version: 7.10.1
+
+  environment:
+    PATH: $HOME/.cabal/bin:$CIRCLE_ARTIFACTS:$PATH:/$HOME/.cabal-sandbox/bin
+
+  override:
+    - if cabal --version | grep 1.23.0.0; then echo "Version 1.23.0.0"; else cd ~/ && git clone https://github.com/plow-technologies/cabal.git && cd cabal && cabal --no-require-sandbox install -j2 Cabal/ cabal-install/; fi
+    - git clone git@github.com:plow-technologies/plow-scripts.git
+    - cp plow-scripts/config $HOME/.cabal/config
+    - cabal --no-require-sandbox update
+
+test:
+  override:
+    # plow-extras-time
+    - cd plow-extras-time && cabal sandbox init
+    - cd plow-extras-time && cabal install --only-dependencies
+    - cd plow-extras-time && cabal configure --ghc-options=-Werror
+    - cd plow-extras-time && cabal build
+
+deployment:
+  staging:
+    branch: master
+    commands:
+      - cd plow-extras-time && sh plow-scripts/hackage.sh
