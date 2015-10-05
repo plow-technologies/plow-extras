@@ -19,9 +19,14 @@ test:
     - cd plow-extras-time && cabal install --only-dependencies
     - cd plow-extras-time && cabal configure --ghc-options=-Werror
     - cd plow-extras-time && cabal build
+    - cd plow-extras-lens && cabal sandbox init
+    - cd plow-extras-lens && cabal install --only-dependencies
+    - cd plow-extras-lens && cabal configure --ghc-options=-Werror
+    - cd plow-extras-lens && cabal build
 
 deployment:
   staging:
     branch: master
     commands:
       - cd plow-extras-time && sh ../plow-scripts/hackage.sh
+      - cd plow-extras-lens && sh ../plow-scripts/hackage.sh
