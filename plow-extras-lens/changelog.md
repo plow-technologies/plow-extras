@@ -2,6 +2,9 @@
 # key: newchangelog
 # -- 
 
+# Version 1.0.1
+Dropped makeLenses_ the lenses from works about as well and is a lot less work to maintain
+
 Change Log
 ==================
 

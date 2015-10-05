@@ -1,12 +1,15 @@
-{-# LANGUAGE CPP,NoImplicitPrelude, NoMonomorphismRestriction, FlexibleContexts, TemplateHaskell #-}
+{-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE RankNTypes #-}
+{-# LANGUAGE KindSignatures #-}
+{-# LANGUAGE CPP #-}
 
 module Plow.Extras.Lens where
 
-import Prelude (($))
-import Data.Char (toLower)
+
+
 import Control.Category
 import Data.Monoid
-import Language.Haskell.TH
+
 -- import Plow.Extras.Lens.Internal
 import Data.Functor
 import Control.Monad.Reader
@@ -17,12 +20,25 @@ import Prelude (Int)
 -- > x = Set.fromList [Left 1 ,Right 3, Left 4]
 -- > y = icatPrisms (_Just ) (Set.insert) x ==> [1,2,3]
 
+#if MIN_VERSION_lens(4,13,0)
+catPrisms :: forall r
+                          a
+                          (m :: * -> *)
+                          (f :: * -> *)
+                          a1
+                          (p :: * -> * -> *)
+                          a2.
+                   (Foldable f, Monoid r, Monoid a2, MonadReader (f a1) m,
+                    Indexable Int p) =>
+                   ((a -> Const r a) -> p a1 (Const r a1)) -> (a -> a2 -> r) -> m r
 
+#else
 catPrisms :: (Functor (p a), Foldable f, Monoid r, Monoid a2,
                     MonadReader (f a1) m, Profunctor p,
                     Indexable Int p1) =>
                    (p a (Const r a) -> p1 a1 (Const r a1)) -> p a (a2 -> r) -> m r
-
+             
+#endif        
 catPrisms l f = views (folded.l) (f ?? mempty)
 
 
@@ -42,21 +58,3 @@ icatPrisms l f = iviews (ifolded . l )  f ?? mempty
 
 
 
--- | Make lenses with underscore trailing for non-underscored records
--- non-classy variety without simple restrictions
-#if !MIN_VERSION_lens (4,5,4)
-makeLenses_ :: Name -> DecsQ
-makeLenses_ t = makeLensesWith ?? t $ lensRules & lensField .~ lFcn
- where 
-   lFcn _fieldNames n = case nameBase n of
-                          x:xs -> [TopName (mkName ((toLower x:xs)  <> "_"))]
-                          [] -> []
-
-#else
-makeLenses_ :: Name -> DecsQ
-makeLenses_ t = makeLensesWith ?? t $ lensRules & lensField .~ lFcn
- where 
-   lFcn _typeName _fieldNames n = case nameBase n of
-                                    x:xs -> [TopName (mkName ((toLower x:xs)  <> "_"))]
-                                    [] -> []
-#endif
