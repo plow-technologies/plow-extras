@@ -3,6 +3,7 @@ module Plow.Extras.Crontab where
 import           Data.Time
 import           Data.Time.Calendar.WeekDate
 import           Text.ParserCombinators.ReadP
+import           Control.Applicative
 
 data DOW = Sunday | Monday | Tuesday | Wednesday | Thursday | Friday | Saturday deriving (Ord, Eq, Show, Bounded, Enum)
 
@@ -42,29 +43,40 @@ utcToCronTab time = CronTab m hr dom (toMonth mnth) (toDOW dow)
 --checks equality of CronTab input and parsed CronTab
 compareToParsedCron :: CronTab -> ReadP Bool
 compareToParsedCron cron = do
+  _ <- skipSpaces
   m <- parseRange parseMinute
+  _ <- skipSpaces
   hr <- parseRange parseHour
+  _ <- skipSpaces
   dom <- parseRange parseDOM
+  _ <- skipSpaces
   mon <- parseRange parseMonth
+  _ <- skipSpaces
   dow <- parseRange parseDOW
   return $ m (minute cron) && hr (hour cron) && dom (dayOfMonth cron) && mon (month cron) && dow (dayOfWeek cron)
 
+
 parseRange :: (Enum a, Ord a) => ReadP a -> ReadP (a -> Bool)
-parseRange p = parseAsterik <++ parseRng <++ parseList <++ parseSingleton
+parseRange parser = parseAsterik <++ parseRng <++ parseList <++ parseSingleton 
   where
     parseSingleton = do
-      val <- p
+      val <- parser
       return $ (==) val
     parseList = do
-      vals <- sepBy p (char ',')
+      vals <- listElemParser 
       return $ flip elem vals
+       where
+         listElemParser = do
+                parsedStart <- parser <* char ','
+                rest <- manyTill (parser <* char ',' <|> parser) (char ' ' *> pure () <|>
+                                                                  eof      *> pure () )
+                return $ parsedStart:rest
     parseRng = do
-      first <- p
+      first <- parser
       _ <- char '-'
-      lst <- p
+      lst <- parser
       return $ flip elem [first .. lst]
     parseAsterik = do
-      skipSpaces
       _ <- char '*'
       return $ const True
     -- Daniel: Unused code?
@@ -128,3 +140,9 @@ toDOW dayInt =
     5 -> Friday
     6 -> Saturday
     _ -> error $ "Invalid Day of Week: " ++ show dayInt
+
+--  Delete THis
+-- testParser a = readP_to_S $ compareToParsedCron a
+
+-- cron = CronTab 0 0 1 January Sunday
+-- cronTwo = CronTab 5 4 13 March Wednesday

@@ -31,6 +31,22 @@ cronParseTests = testGroup "Crontab Parser"
       testParser cron "1-59 1-23 2-31 2-12 2-6" @?= [(False,"")]
   , testCase "asteriks, ranges, and ints 1 - true" $
       testParser cron "* 0-23 * 1 0" @?= [(True,"")]
+  , testCase "all lists 1 - true" $
+      testParser cron "0,1,2,7 0,4,5,6 1,4 1,3 0,2" @?= [(True,"")]
+  , testCase "all lists 1 - false" $
+      testParser cron "1,2,7 0,4,5,6 1,4 1,3 0,2" @?= [(False,"")]
+  , testCase "asteriks, ranges, ints, lists 1 - true" $
+      testParser cron "* 0-6 1,4 1 0,2" @?= [(True,"")]
+  , testCase "asteriks, ranges, ints, lists 1 - false" $
+      testParser cron "0 1,4 1-4 * 0,2" @?= [(False,"")]
+  , testCase "all lists 2 - true" $
+      testParser cronTwo "0,1,2,5 0,4,5,6 1,4,13 1,3 0,2,3" @?= [(True,"")]
+  , testCase "all lists 2 - false" $
+      testParser cronTwo "0,1,2 0,4,5,6 4,13 1,3 0,2,3"  @?= [(False,"")]
+  , testCase "asteriks, ranges, ints, lists 2 - true" $
+      testParser cronTwo "* 0-6 1,4,13 3 0,2,3" @?= [(True,"")]
+  , testCase "asteriks, ranges, ints, lists 2 - false" $
+      testParser cronTwo "5 * 1-4 1,3 0,2" @?= [(False,"")]
   , testCase "asteriks, ranges, and ints 1 - false" $
       testParser cron "5-10 * * 4 2" @?= [(False,"")]
   , testCase "imposible range 1" $
@@ -49,9 +65,12 @@ cronParseTests = testGroup "Crontab Parser"
       testParser cronTwo "5-10 * * 4-1 2" @?= [(False,"")]
   ]
   where
-    cron = CronTab 0 0 1 January Sunday
-    cronTwo = CronTab 5 4 13 March Wednesday
-    testParser a = readP_to_S $ compareToParsedCron a
+
+
+testParser a = readP_to_S $ compareToParsedCron a
+
+cron = CronTab 0 0 1 January Sunday
+cronTwo = CronTab 5 4 13 March Wednesday
 
 cronShouldSendTests = testGroup "Crontab shouldSend"
   [ testCase "all asteriks 1" $
@@ -80,6 +99,10 @@ cronShouldSendTests = testGroup "Crontab shouldSend"
       testShouldSend timeTwo "5-10 * * 4-1 2" @?= [(False,"")]
   ]
   where
-    testShouldSend a = readP_to_S $ shouldSend a
-    time = UTCTime (ModifiedJulianDay 57023) 0 --January 1, 2015, 12:00 AM
-    timeTwo = UTCTime (ModifiedJulianDay 50372) 21600 --October 16, 1996, 6:00 AM
+    shouldSend currentTime = compareToParsedCron $ utcToCronTab currentTime
+    testShouldSend currentTime = readP_to_S $ shouldSend currentTime
+
+time = UTCTime (ModifiedJulianDay 57023) 0 --January 1, 2015, 12:00 AM
+timeTwo = UTCTime (ModifiedJulianDay 50372) 21600 --October 16, 1996, 6:00 AM
+
+
