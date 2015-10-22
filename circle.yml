@@ -18,16 +18,17 @@ dependencies:
     - git clone git@github.com:plow-technologies/plow-scripts.git
     - cp plow-scripts/config $HOME/.cabal/config
     - cabal --no-require-sandbox update
+    - cd plow-extras-time && cabal sandbox init
+    - cd plow-extras-time && cabal install --only-dependencies
+    - cd plow-extras-lens && cabal sandbox init
+    - cd plow-extras-lens && cabal install --only-dependencies
 
 test:
   override:
     # plow-extras-time
-    - cd plow-extras-time && cabal sandbox init
-    - cd plow-extras-time && cabal install --only-dependencies
     - cd plow-extras-time && cabal configure --ghc-options=-Werror
     - cd plow-extras-time && cabal build
-    - cd plow-extras-lens && cabal sandbox init
-    - cd plow-extras-lens && cabal install --only-dependencies
+    # plow-extras-lens
     - cd plow-extras-lens && cabal configure --ghc-options=-Werror
     - cd plow-extras-lens && cabal build
 
