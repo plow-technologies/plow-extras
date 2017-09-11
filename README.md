@@ -1,4 +1,4 @@
-hi-hspec
+plow-extras-time
 =================
 
 A template for [hi](https://github.com/fujimura/hi).
