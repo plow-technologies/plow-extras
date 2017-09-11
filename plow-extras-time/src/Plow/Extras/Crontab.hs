@@ -17,7 +17,7 @@ instance Enum DOW where
   toEnum 6  = Saturday
   toEnum 7  = Sunday
   toEnum _  = Sunday -- for function completeness
-  
+
   fromEnum Monday    = 1
   fromEnum Tuesday   = 2
   fromEnum Wednesday = 3
@@ -148,6 +148,12 @@ toMonth monthInt =
       11 -> November
       12 -> December
       _ -> error $ "Invalid month: " ++ show monthInt
+
+
+
+-- toDOW should always come back 1-7 but looking at how crontab in linux works
+-- Sunday can be either 0 or 7 in the crontab for days so we are making it the same
+-- for future protection
 
 toDOW :: Int -> DOW
 toDOW dayInt =
