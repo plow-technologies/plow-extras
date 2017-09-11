@@ -1,40 +1,42 @@
-machine:
-  ghc:
-    version: 7.10.1
+# This is a default circle.yml that can be used as
+# starting point.
 
+machine:
+  pre:
+    - echo 'deb http://download.fpcomplete.com/ubuntu precise main'|sudo tee /etc/apt/sources.list.d/fpco.list
+    - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 575159689BEFB442
+    - sudo apt-get update
+    - sudo apt-get install gcc-4.8
+    - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 90
+    - gcc --version
+    - sudo apt-get install stack -y
+    
   environment:
-    PATH: $HOME/.cabal/bin:$CIRCLE_ARTIFACTS:$PATH:/$HOME/.cabal-sandbox/bin
+    PATH: $HOME/.local/bin:$HOME/.cabal/bin:$CIRCLE_ARTIFACTS:$PATH:$HOME/$CIRCLE_PROJECT_REPONAME/.cabal-sandbox/bin
 
 dependencies:
-  
   cache_directories:
-    - ~/.cabal/bin
-    - ~/plow-extras/plow-extras-time/.cabal-sandbox
-    - ~/plow-extras/plow-extras-lens/.cabal-sandbox
+    - "~/plow-extras/plow-extras-time/.stack-work"
+    - "~/plow-extras/plow-extras-lens/.stack-work"
+    - "~/.stack"
+    - "~/.local/bin"
+    - "~/.local/share/plow-stack"
   
   override:
-    - cabal --version
-    - if cabal --version | grep 1.23.0.0; then echo "Version 1.23.0.0"; else cd ~/ && git clone https://github.com/plow-technologies/cabal.git && cd cabal && cabal --no-require-sandbox install -j2 Cabal/ cabal-install/; fi
-    - git clone git@github.com:plow-technologies/plow-scripts.git
-    - cp plow-scripts/config $HOME/.cabal/config
-    - cabal --no-require-sandbox update
-    - cd plow-extras-time && cabal sandbox init
-    - cd plow-extras-time && cabal install --only-dependencies
-    - cd plow-extras-lens && cabal sandbox init
-    - cd plow-extras-lens && cabal install --only-dependencies
+    - cd ~ && git clone git@github.com:plow-technologies/plow-scripts.git
+    # Get the newest plow-stack
+    - aws s3 cp --quiet s3://plow-build-tools/plow-stack ~/.local/bin/plow-stack
+    - chmod +x ~/.local/bin/plow-stack
+    - plow-stack :version
+    
+    - cd plow-extras-time && stack setup && plow-stack test --only-dependencies -j2
+    - cd plow-extras-lens && stack setup && plow-stack test --only-dependencies -j2
+    
 
 test:
   override:
     # plow-extras-time
-    - cd plow-extras-time && cabal configure --ghc-options=-Werror
-    - cd plow-extras-time && cabal build
+    - cd plow-extras-time && stack setup && plow-stack test
     # plow-extras-lens
-    - cd plow-extras-lens && cabal configure --ghc-options=-Werror
-    - cd plow-extras-lens && cabal build
+    - cd plow-extras-time && stack setup && plow-stack test
 
-deployment:
-  staging:
-    branch: master
-    commands:
-      - cd plow-extras-time && sh ../plow-scripts/hackage.sh
-      - cd plow-extras-lens && sh ../plow-scripts/hackage.sh
