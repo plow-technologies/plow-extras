@@ -5,7 +5,27 @@ import           Data.Time.Calendar.WeekDate
 import           Text.ParserCombinators.ReadP
 import           Control.Applicative
 
-data DOW = Sunday | Monday | Tuesday | Wednesday | Thursday | Friday | Saturday deriving (Ord, Eq, Show, Bounded, Enum)
+data DOW = Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday deriving (Ord, Eq, Show, Bounded)
+
+instance Enum DOW where
+  toEnum 0  = Sunday -- for function completeness
+  toEnum 1  = Monday
+  toEnum 2  = Tuesday
+  toEnum 3  = Wednesday
+  toEnum 4  = Thursday
+  toEnum 5  = Friday
+  toEnum 6  = Saturday
+  toEnum 7  = Sunday
+  toEnum _  = Sunday -- for function completeness
+  
+  fromEnum Monday    = 1
+  fromEnum Tuesday   = 2
+  fromEnum Wednesday = 3
+  fromEnum Thursday  = 4
+  fromEnum Friday    = 5
+  fromEnum Saturday  = 6
+  fromEnum Sunday    = 7
+
 
 data Month = January | February | March | April | May | June | July | August | September | October | November | December deriving (Ord, Eq, Show, Bounded, Enum)
 
@@ -139,6 +159,7 @@ toDOW dayInt =
     4 -> Thursday
     5 -> Friday
     6 -> Saturday
+    7 -> Sunday
     _ -> error $ "Invalid Day of Week: " ++ show dayInt
 
 --  Delete THis

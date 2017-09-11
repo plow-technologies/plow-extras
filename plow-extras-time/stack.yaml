@@ -1,0 +1,465 @@
+flags:
+  semigroups:
+    binary: false
+  servant-matrix-param:
+    with-servant-client: true
+    with-servant-server: true
+    with-servant-aeson-specs: true
+  onping-data-client:
+    cache: true
+extra-package-dbs: []
+packages:
+- .
+- location:
+    git: git@github.com:plow-technologies/single-well-roc-tlp.git
+    commit: d49a84919bd9ed93dcc2aae685ac7a1f912c06c7
+  subdirs:
+  - roc-tlp-types
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/roc-steady-serial.git
+    commit: 7c10baf9b6655b675c84f6146fa8fd36aa69e141
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/roc-steady.git
+    commit: fc902c4df477df1c4bae9f881f146733e982fa87
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/onping-core.git
+    commit: cf618b5ff5d2c87f741265ffd0018c216987353a
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/hspec-golden-aeson.git
+    commit: 5849c2c70f196a0fcbc1a4282785ede8ddbefd1c
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/onping-pricing-types.git
+    commit: f7195d2a3a9906b1c7e7a3454d91cbe917d78be2
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/onping-mask-script.git
+    commit: a23635a24b8cca54c466f944f82e4f134c843606
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/combustor-downtime-service-types.git
+    commit: d83cb8a27bd840246660b619819b2bf2fabe65f9
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/murica.git
+    commit: c5b88457adacf101d7c40048360ab1d73d3c2460
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/single-well-tflow-types.git
+    commit: dc61c37f00176bd8489aa28ead8265875febff7a
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/simple-cell.git
+    commit: 10b0e1f24aeb28a543bfaee1462ffd8656c33863
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/simple-store.git
+    commit: 4388322a43674a0774e42db1738f653ead1cc9ab
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/get-me-there.git
+    commit: 57a980fb11077189ed0382fe1b6564b4676f1f80
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/plowtech-common-instances.git
+    commit: fb3d6896438dd09d7b7e4dcf9aa5c58586791689
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/single-well-manual-types.git
+    commit: 9c4729afdd40de9519315a8dfb6b65dbbc65b989
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/binary-transform.git
+    commit: b6e8bbd29158b78af73ab10b3fa3b01b84062482
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/structured-script.git
+    commit: ada1df29efcb0440ad683ed5c73be157085e7369
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/onping-data-client.git
+    commit: cd12b8f02a9cf5c04595b2a9d2ccbab5b0709ea1
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/singlewell-roc-types.git
+    commit: dbff7f14e15c284ed4171ba58d9babe5e6cb28c9
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/single-well-controllogix-types.git
+    commit: dd37aeec7f0e900281655ddf3901ee98b5b89cbb
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/binary-store.git
+    commit: 982acf4408fa0fdabde618bbcc2a7f30435990ef
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/single-well-micrologix-types.git
+    commit: e1ff64cccd08ab7494c9a799d5d3243958478fc2
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/plowtech-log-types.git
+    commit: 344cad4516c6c9649a71c8bbb6a6eddf76a0f49e
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/plowtech-authentication-types.git
+    commit: 6d227b15d3215dc9923b57e22950c465cdc1a473
+  subdirs:
+  - plowtech-authentication-types
+  - plowtech-authentication-base-types
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/persistent.git
+    commit: 22655adf5bd79636c9520a2de532585ee7ed9eaf
+  subdirs:
+  - persistent-mongoDB
+  - persistent-template
+  - persistent
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/directed-keys.git
+    commit: 1c485a703967f4f40ef489a8fd3d89ce22f85812
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/plow-ra.git
+    commit: 72663b0ebb0d9ca2be31c4624d816affe88840d2
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/plow-ra-network.git
+    commit: b749d774756f4dfc3910f132544ff1e8fffe7f04
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/hs-webdriver.git
+    commit: 09ec21e66918dad9567fe01d291ea729a8706b34
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/yesod-auth-plowtech.git
+    commit: 42f1f3b70f168fd8a617765bf1e50ffd7777d9b3
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/onping-types.git
+    commit: a40c54b4fe36949dc986d3bf1dc5e96a3c737644
+  subdirs:
+  - onping-types
+  - onping-base-types
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/S3-Simple.git
+    commit: 4e9d3fb091ba19dccda75668dec66bc73c6115a4
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/report-template.git
+    commit: 4b16fa2bd8a6fb3b2872e75adca02d326daf2708
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/single-well-types.git
+    commit: 6be66de67eea17b214353701fc30316641c0e6d1
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/haskell-modbus.git
+    commit: 927d117d7d6e60b96626cb964f562ba60160a185
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/modbus-tcp.git
+    commit: 119470b0ec20520db872f34a7dbbb8de30980b27
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/spot-report-servant-client.git
+    commit: b6f3869f481a31fd0979ea65d2f4a8759ff1df20
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/stakeout.git
+    commit: 929433a0c23ec2efdfc0df8569e4c2075a52d6c6
+  subdirs:
+  - stakeout-adapter
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/plow-mocks.git
+    commit: 2783f8a7c78cf93c172f9f9e76b40cde0f19cd14
+  subdirs:
+  - plow-alarm-mocks
+  - primitive-generator-mocks
+  extra-dep: true
+- location:
+    git: git@github.com:mchaver/persistent-parser.git
+    commit: 70c0014e1bfcd39b507d818cace0567c59cef275
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/alarm-db-types.git
+    commit: 42244e8864e15157cd39b4b3ebb43fc64da9e21c
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/hmi-types.git
+    commit: ac9cbcb590c4dcde5338b93028043d3c52334f9a
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/audit-trail.git
+    commit: a3435fdf1fef2e9a70f20888756a4f4e7bab4bb5
+  subdirs:
+  - audit-trail-types
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/alarm-log.git
+    commit: e34c257e3384a31dae8122e7211252bc4b02675f
+  subdirs:
+  - alarm-log-adapter
+  - alarm-log-types
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/saucelabs-webdriver.git
+    commit: 543ba904a8f34e9f713f1b78ff706efde8f4f05d
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/alarm-db-keys.git
+    commit: 47465937727d0e9c9ff594e96aed0edc1613a947
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/onping-api.git
+    commit: eba0ad062cc4cb45c82a9ef500c37ea644a495c8
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/hS3.git
+    commit: cb41722109f4518800f9757f6b482d6a5f284011
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/plow-config.git
+    commit: 77d30196b1dbc54eb424733fb99ca7672467757c
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/from-to-text.git
+    commit: 54334b3e575a4fc06186a3173f67fca822c02d40
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/automated-tachdb-reports-types.git
+    commit: 9e42ad8542648ee73eef072cdcfe037c67945b55
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/rtu-manager-types.git
+    commit: 5e7a11ea9f41dfb7c3b02db126ccab0e6e0bd4c3
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/wellpilot-types.git
+    commit: 3eba2a44b444383c52ed7d8379a95af3515daeb5
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/wellpilot-adapter.git
+    commit: 5a3924595a0247853c60d4b9b14eee29dce9ad0b
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/chainsaw.git
+    commit: bd4a0534dc74d527c544fd1bd939e92e04b40ccc
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/gelf-types.git
+    commit: cedcfe263fdf5759244ed2e3177be156e92ade25
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/gelf-udp.git
+    commit: 04a6718b31c2829b226090e7e8408f45497a5ef6
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/onping-tag-types.git
+    commit: b3ac53154f1bf94008b97972b63640c43ade6b17
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/locked-poll.git
+    commit: c46db705e5f73bfbf09808f96d3395328a7a46c3
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/xlsior.git
+    commit: 83f26380316b2db04f804bd30340bd9c6967c980
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/mir3.git
+    commit: 0e3cfc27fcb66709fdff215af87c4a66aa717603
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/mir3-simple.git
+    commit: 74641b369283262ea854b99b9bcf05f0a6dff5fa
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/node-client-configs.git
+    commit: 702443638dac69a5b0b37a79ed598dc38b6c9a44
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/shakespeare-template.git
+    commit: a431d1325c584b0aa7e9cfa192b5b79135505b3b
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/plow-tflow.git
+    commit: 616b23bfa91f9dec88d21249cfb6ae70633af568
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/plow-tflow-network.git
+    commit: 4713435797a65d2e9fb474278b0ddd29e4dd940d
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/crc16-calculator.git
+    commit: 91247d631139ef9ebb9668fe9fba3b7e46cf4aee
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/spot-report.git
+    commit: eb4147261d4c4acd44cabd761b4fb7960fbcdc53
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/rtu-client.git
+    commit: 8b174a0f71274df881a2b29862d14ae182f3f8a6
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/plow-stats-ekg.git
+    commit: a1c014eaaa1ac6f285e59113f781076e2a9d8204
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/yesod-routes-metrics.git
+    commit: 7be8bcc17dd89760d331c60e08f11a7e3195ec90
+  subdirs: []
+  extra-dep: true
+- location:
+    git: git@github.com:plow-technologies/onping-lens
+    commit: 5e94b245d688fe4b64a308164dc9997037a822d0
+  subdirs: []
+  extra-dep: true
+extra-deps:
+- Crypto-4.2.5.1
+- aeson-1.0.2.1
+- aeson-extra-0.4.0.0
+- aeson-serialize-0.0.0
+- async-pool-0.9.0.1
+- basic-prelude-0.4.1
+- binary-0.8.4.0
+- bson-0.3.2.2
+- cabal-doctest-1.0.2
+- cereal-0.5.4.0
+- cereal-text-0.1.0.2
+- compressed-3.0.3
+- cond-0.4.1.1
+- connection-0.2.5
+- containers-0.5.10.2
+- data-accessor-transformers-0.2.1.7
+- data-default-0.5.3
+- data-default-instances-base-0.1.0.1
+- dataenc-0.12
+- ekg-statsd-0.2.1.0
+- entropy-0.3.7
+- gnuplot-0.5.4.1
+- groundhog-0.8
+- groundhog-converters-0.1.0
+- groundhog-sqlite-0.8
+- groundhog-th-0.8
+- happy-1.19.5
+- haxl-0.4.0.1
+- herf-time-0.2.2
+- hspec-hashable-0.1.0.0
+- http-api-data-0.3.2
+- http-client-0.4.31
+- http-types-0.9.1
+- lens-4.15.4
+- lifted-async-0.9.0
+- logging-3.0.4
+- microtimer-0.0.1.2
+- mysql-0.1.4
+- mysql-simple-0.2.2.5
+- nats-1
+- persistent-audit-0.2.0.0
+- persistent-mysql-2.3
+- persistent-template-2.1.3.7
+- pool-conduit-0.1.2.3
+- pqueue-1.3.2.2
+- pretty-simple-2.0.0.0
+- profunctors-5.2.1
+- quickcheck-arbitrary-adt-0.2.0.0
+- recursion-schemes-5
+- regex-genex-0.7.0
+- semigroups-0.18.1
+- serial-test-generators-0.1.3
+- serialport-0.4.7
+- servant-0.9.1.1
+- servant-client-0.9.1.1
+- servant-docs-0.9.1.1
+- servant-foreign-0.9.1.1
+- servant-js-0.9
+- servant-matrix-param-0.3.3
+- servant-server-0.9.1.1
+- shakespeare-js-1.3.0
+- shakespeare-text-1.1.0
+- special-keys-0.1.0.3
+- stream-monad-0.3
+- syb-0.5.1
+- tasty-discover-2.0.1
+- tasty-groundhog-converters-0.1.0
+- th-abstraction-0.2.4.0
+- th-orphans-0.12.2
+- timeout-0.1.1
+- tz-0.1.2.1
+- tzdata-0.1.20161123.0
+- wai-extra-3.0.19
+- webdriver-0.6.2.1
+- xlsx-0.2.0
+- yesod-form-json-0.0.1
+- zip-archive-0.2.3.7
+resolver: lts-7.4
