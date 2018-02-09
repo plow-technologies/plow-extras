@@ -64,7 +64,7 @@ echo $GIT_REPO_HOME
 
 cd plow-extras-time && plow-stack setup && plow-stack test
 cd $GIT_REPO_HOME
-cd plow-extras-lens && plow-stack setup && plow-stack test
+cd plow-extras-lens && plow-stack setup && plow-stack build
 
 # DEPLOY SECTION
 #--------------------------------------------------------------------------------------------------------------#
