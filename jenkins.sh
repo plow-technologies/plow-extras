@@ -61,9 +61,9 @@ chmod +x ~/.local/bin/plow-build-archive
 PWD=$(pwd)
 echo $PWD
 
-cd plow-extras-time && stack setup && plow-stack test
+cd plow-extras-time && plow-stack setup && plow-stack test
 cd $PWD
-cd plow-extras-lens && stack setup && plow-stack test
+cd plow-extras-lens && plow-stack setup && plow-stack test
 
 # DEPLOY SECTION
 #--------------------------------------------------------------------------------------------------------------#
