@@ -59,10 +59,11 @@ chmod +x ~/.local/bin/plow-build-archive
 
 # Process Working Directory, should be root of github repo
 PWD=$(pwd)
-echo $PWD
+GIT_REPO_HOME=$PWD
+echo $GIT_REPO_HOME
 
 cd plow-extras-time && plow-stack setup && plow-stack test
-cd $PWD
+cd $GIT_REPO_HOME
 cd plow-extras-lens && plow-stack setup && plow-stack test
 
 # DEPLOY SECTION
