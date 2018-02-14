@@ -1,4 +1,4 @@
-[![Build Status](https://jenkins.plowtech.net/buildStatus/icon?job=plow-extras)](https://jenkins.plowtech.net/view/master/job/plow-extras/)
+
 plow-extras-time
 =================
 
