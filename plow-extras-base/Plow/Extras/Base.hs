@@ -13,6 +13,7 @@ module Plow.Extras.Base (
 import Data.Monoid (Endo (..))
 import Data.Bifunctor (Bifunctor (..))
 import Data.Bifoldable (Bifoldable (..))
+import Data.Bitraversable (Bitraversable (..))
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -64,3 +65,6 @@ instance (Monoid l, Monoid r) => Monoid (EitherPartition l r) where
 
 instance Bifoldable EitherPartition where
   bifoldMap f g (EitherPartition l r) = mappend (f l) (g r)
+
+instance Bitraversable EitherPartition where
+  bitraverse f g (EitherPartition l r) = EitherPartition <$> f l <*> g r
