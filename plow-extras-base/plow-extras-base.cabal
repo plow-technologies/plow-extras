@@ -1,0 +1,14 @@
+Name:                   plow-extras-base
+Version:                0.1.0
+Author:                 Daniel Casanueva <daniel.casanueva@plowtech.net>
+License:                BSD3
+License-File:           LICENSE
+Synopsis:               Extended base, by Plow Technologies.
+Cabal-Version:          >= 1.10
+Build-Type:             Simple
+
+Library
+  Default-Language:     Haskell2010
+  GHC-Options:          -Wall -Werror
+  Exposed-Modules:      Plow.Extras.Base
+  Build-Depends:        base == 4.*
