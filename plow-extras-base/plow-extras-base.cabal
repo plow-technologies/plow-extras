@@ -11,4 +11,4 @@ Library
   Default-Language:     Haskell2010
   GHC-Options:          -Wall -Werror
   Exposed-Modules:      Plow.Extras.Base
-  Build-Depends:        base == 4.*
+  Build-Depends:        base >= 4.10 && < 5
