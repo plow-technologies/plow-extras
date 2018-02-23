@@ -24,9 +24,9 @@ import Data.Bitraversable (Bitraversable (..))
 -- EitherPartition
 
 -- | Result of combining a collection of values of type 'Either'.
-data EitherPartition err v = EitherPartition
-  { eitherPartitionLeft  :: err
-  , eitherPartitionRight :: v
+data EitherPartition l r = EitherPartition
+  { eitherPartitionLeft  :: l
+  , eitherPartitionRight :: r
     } deriving (Eq, Show)
 
 -- | Fold a foldable value with values of type 'Either'.
