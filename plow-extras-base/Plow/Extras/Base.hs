@@ -1,4 +1,6 @@
 
+{-# LANGUAGE CPP #-}
+
 -- | Types and functions that extend the 'base' package.
 --
 --   Please, do not add new dependencies without consent!
@@ -12,8 +14,10 @@ module Plow.Extras.Base (
 
 import Data.Monoid (Endo (..))
 import Data.Bifunctor (Bifunctor (..))
+#if MIN_VERSION_base(4,10,0)
 import Data.Bifoldable (Bifoldable (..))
 import Data.Bitraversable (Bitraversable (..))
+#endif
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -63,8 +67,12 @@ instance (Monoid l, Monoid r) => Monoid (EitherPartition l r) where
   mappend (EitherPartition l r) (EitherPartition l' r') =
     EitherPartition (mappend l l') (mappend r r')
 
+#if MIN_VERSION_base(4,10,0)
+
 instance Bifoldable EitherPartition where
   bifoldMap f g (EitherPartition l r) = mappend (f l) (g r)
 
 instance Bitraversable EitherPartition where
   bitraverse f g (EitherPartition l r) = EitherPartition <$> f l <*> g r
+
+#endif
