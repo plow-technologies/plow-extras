@@ -27,7 +27,7 @@ import Data.Bitraversable (Bitraversable (..))
 data EitherPartition err v = EitherPartition
   { eitherPartitionLeft  :: err
   , eitherPartitionRight :: v
-    }
+    } deriving (Eq, Show)
 
 -- | Fold a foldable value with values of type 'Either'.
 foldEitherPartition
@@ -66,6 +66,16 @@ instance (Monoid l, Monoid r) => Monoid (EitherPartition l r) where
   mempty = EitherPartition mempty mempty
   mappend (EitherPartition l r) (EitherPartition l' r') =
     EitherPartition (mappend l l') (mappend r r')
+
+instance Monoid l => Applicative (EitherPartition l) where
+  pure = EitherPartition mempty
+  EitherPartition l r <*> EitherPartition l' r' =
+    EitherPartition (mappend l l') (r r')
+
+instance Monoid l => Monad (EitherPartition l) where
+  EitherPartition l r >>= f =
+    let EitherPartition l' r' = f r
+    in  EitherPartition (mappend l l') r'
 
 #if MIN_VERSION_base(4,10,0)
 
