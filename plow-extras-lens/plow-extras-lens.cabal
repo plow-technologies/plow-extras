@@ -1,5 +1,5 @@
 Name:                   plow-extras-lens
-Version:                1.0.1
+Version:                1.0.2
 Author:                 Scott Murphy <scottmurphy09@gmail.com>
 Maintainer:             Scott Murphy <scottmurphy09@gmail.com>
 License:                BSD3
@@ -21,15 +21,15 @@ Library
                       , lens >= 4.3.3
                       , mtl
 
-Test-Suite spec
-  Type:                 exitcode-stdio-1.0
-  Default-Language:     Haskell2010
-  Hs-Source-Dirs:       src
-                      , test
-  Ghc-Options:          -Wall
-  Main-Is:              Spec.hs
-  Build-Depends:        base
-                      , hspec
+-- Test-Suite spec
+--   Type:                 exitcode-stdio-1.0
+--   Default-Language:     Haskell2010
+--   Hs-Source-Dirs:       src
+--                       , test
+--   Ghc-Options:          -Wall
+--   Main-Is:              Spec.hs
+--   Build-Depends:        base
+--                       , hspec
 
 Source-Repository head
   Type:                 git
