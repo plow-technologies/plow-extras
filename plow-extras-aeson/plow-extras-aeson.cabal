@@ -28,6 +28,7 @@ Test-Suite spec
                       , test
   Ghc-Options:          -Wall
   Main-Is:              Spec.hs
+  Other-Modules:        Plow.Extras.AesonSpec
   Build-Depends:        base
                       , hspec
 
