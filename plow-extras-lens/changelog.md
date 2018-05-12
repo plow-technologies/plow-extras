@@ -1,6 +1,9 @@
 # name: changelog
 # key: newchangelog
 # --
+# Version 1.1.0
+upgrade to ghc 8.2.2
+
 # Version 1.0.2
 comment out unused test suite
 
