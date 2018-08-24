@@ -1,6 +1,9 @@
 # plow-extras-time
 ## changelog
 
+* 0.3.0.1 (24. August 2018)
+added getCurrentEpochTime accuracy test
+
 * 0.3.0.0
 upgrade to ghc 8.2.2
 

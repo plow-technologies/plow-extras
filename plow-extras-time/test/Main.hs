@@ -3,11 +3,13 @@ import           Data.Time.Calendar           (Day)
 import           Data.Time.Clock              (diffUTCTime)
 import           Plow.Extras.Crontab
 import           Plow.Extras.Time
+import           Test.QuickCheck.Property     (ioProperty)
 import           Test.QuickCheck.Instances    ()
 import           Test.Tasty                   (TestTree, defaultMain, testGroup)
 import           Test.Tasty.HUnit
 import           Test.Tasty.QuickCheck        (testProperty)
 import           Text.ParserCombinators.ReadP
+import           System.Process               (readProcess)
 
 main :: IO ()
 main = defaultMain tests
@@ -20,6 +22,10 @@ timeTests = testGroup "plow-extras-time"
       \t -> round (diffUTCTime (intToUTCTime $ utcTimeToInt t) t) == (0 :: Int)
   , testProperty "utcTimeToInt . intToUTCTime = id" $
       \t -> (utcTimeToInt . intToUTCTime) t == t
+  , testProperty "Time accuracy of getCurrentEpochTime" $ ioProperty $ do
+      tstr <- init <$> readProcess "date" ["+%s"] []
+      t <- getCurrentEpochTime
+      pure $ abs (t - read tstr) <= 1
   ]
 
 cronParseTests = testGroup "Crontab Parser"
